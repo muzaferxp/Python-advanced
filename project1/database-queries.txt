@@ -1,0 +1,75 @@
+CEARE TABLE vendor (
+
+id 		varhcar(200),
+name		varhcar(200),
+email		varhcar(200),
+password		varhcar(200)
+
+)
+
+CREATE TABLE product (
+
+id                	varhcar(200),
+name     		varhcar(200),
+description  	varhcar(200),
+price		int(10),
+vendor_id		varhcar(200)
+ 
+);
+CREATE TABLE orders (
+
+id		varhcar(200),
+product_id	varhcar(200),
+user_id		varhcar(200)
+
+)
+
+CREATE TABLE user(
+id		varhcar(200),
+name		varhcar(200),
+email		varhcar(200),
+password		varhcar(200),
+address		varhcar(2000),
+
+)
+
+
+-----------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+INSERT INTO vendor values (
+"v123",
+"Adam",
+"Adam@gmail.com",
+"$#@rfvh
+);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

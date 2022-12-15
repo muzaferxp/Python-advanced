@@ -29,8 +29,15 @@ def getData():
 #5. Upate row
 #6. Upate a table
 
-
 #7. Delte a row
 #8. Delete a table
 
+#9. Alter table (to add or remove the columns)
 
+
+#10. Drop Table/Database (Delete the data along with the table)
+#11.Trucate  (Deletes the data, but table will not be deleted )
+
+#12. Where (to filter the result)
+
+#FINALLY SQL VS NO SQL

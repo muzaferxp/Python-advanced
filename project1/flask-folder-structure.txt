@@ -1,0 +1,13 @@
+FOLDER STRUCTURE IN FLASK APP
+-------------------------------------------------------------------
+myapp
+	static/
+		style.css
+		logo.png
+	templates/
+		index.html
+		login.html
+	app.py
+	database.db
+	requirements.txt
+	
