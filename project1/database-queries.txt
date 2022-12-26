@@ -17,20 +17,16 @@ vendor_id		varhcar(200)
  
 );
 CREATE TABLE orders (
-
 id		varhcar(200),
 product_id	varhcar(200),
 user_id		varhcar(200)
 
 )
 
-CREATE TABLE user(
-id		varhcar(200),
+CREATE TABLE member(
 name		varhcar(200),
 email		varhcar(200),
-password		varhcar(200),
-address		varhcar(2000),
-
+phone		varhcar(200),
 )
 
 
