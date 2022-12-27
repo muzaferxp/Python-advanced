@@ -1,11 +1,15 @@
 from flask import * 
 import core
+from flask_cors import CORS, cross_origin
+
 
 app = Flask(__name__)
+cors = CORS(app)
 
 
 #1st API 
 @app.route("/members")
+@cross_origin()
 def members():
     return {
         "data" : core.getAllMembers()

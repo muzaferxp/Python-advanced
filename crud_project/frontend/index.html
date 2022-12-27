@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Xplat Community | Dashboard</title>
+        <style>
+            h1{
+                color: blue;
+            }
+
+            .card{
+               background-color: grey;
+               width: 100%; 
+            }
+        </style>
+    </head>
+    <body>
+            <header>
+                <nav>
+                    <h1>Xplat Community</h1>
+                    <a href="add-meber.html">Add Member</a>
+                </nav>
+            </header>
+
+
+            <section id="allmembers">
+            </section>
+    </body>
+
+
+    <script>
+
+        function getMembers(){
+
+            fetch("http://127.0.0.1:5000/members").then((response) => response.json())
+            .then((data) =>{
+                let members = data['data'];
+                for(x in members){
+                    document.getElementById("allmembers").innerHTML += `<!-- card -->
+                                                                            <div class="card">
+                                                                                <h5>Name: ${members[x][0]}</h5>
+                                                                                <h5>Email: ${members[x][1]}</h5>
+                                                                                <h5>Phone: ${members[x][2]}</h5>
+                                                                            </div>`
+                }
+            });
+
+            return
+        }
+
+
+        getMembers()
+        
+    </script>
+</html>

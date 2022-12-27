@@ -4,7 +4,7 @@ import sqlite3
 def runSqlQry(qry):
     data = []
     #1. Connecting to db file
-    con = sqlite3.connect("members.db")
+    con = sqlite3.connect("backend/members.db")
     
     #2. Initialize a cursor which is used to execute the sql query 
     cur = con.cursor()
