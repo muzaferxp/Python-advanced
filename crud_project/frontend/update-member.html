@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+
+    <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Xplat Community | Dashboard</title>
+        <style>
+            h1{
+                color: blue;
+            }
+
+            .btn{
+                background-color: blue;
+                color: white;
+                cursor: pointer;
+            }
+        </style>
+    </head>
+    <body>
+            <header>
+                <nav>
+                    <h1>Add member</h1>
+                    <a href="index.html">Back to home screen</a>
+                </nav>
+            </header>
+
+
+            <br><br>
+            <input id="name_input" type="text" placeholder="Enter Name">  <br><br>
+            <input id="email_input" type="email" placeholder="Enter Email">  <br><br>
+            <input id="phone_input" type="text" placeholder="Enter Phone">  <br><br>
+            <button class="btn" onclick="addMember()" type="button">Submit</button>
+
+
+        <script>
+
+       async function updateMember(){
+            var name = document.getElementById("name_input").value;
+            var email = document.getElementById("email_input").value;
+            var phone = document.getElementById("phone_input").value;
+            
+            let bodyContent = JSON.stringify({
+                "name" : name,
+                "email" : email,
+                "phone" : phone
+              });
+
+              let headersList = {
+                "Content-Type": "application/json"
+               }
+               
+              
+              let response = await fetch("http://127.0.0.1:5000/create-member", { 
+                method: "POST",
+                body: bodyContent,
+                headers: headersList
+              });
+              
+              let data = await response.text();
+              alert("User created successfully")
+        }
+        
+
+    </script>
+    </body>
+</html>

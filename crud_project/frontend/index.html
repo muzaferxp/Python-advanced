@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html>
     <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Xplat Community | Dashboard</title>
         <style>
             h1{
@@ -11,17 +12,27 @@
                background-color: grey;
                width: 100%; 
             }
+
+            #updateForm{
+                display: none;
+                background-color: rgb(129, 129, 27);
+            }
         </style>
     </head>
     <body>
             <header>
                 <nav>
                     <h1>Xplat Community</h1>
-                    <a href="add-meber.html">Add Member</a>
+                    <a href="add-member.html">Add Member</a>
                 </nav>
             </header>
 
-
+            <section id="updateForm">
+                <input id="name_input" type="text" placeholder="Enter Name">  <br><br>
+                <input id="email_input" type="email" placeholder="Enter Email">  <br><br>
+                <input   id="phone_input" type="text" placeholder="Enter Phone" disabled>  <br><br>
+                <button class="btn" onclick="updateMember()" type="button">Submit</button>
+            </section>
             <section id="allmembers">
             </section>
     </body>
@@ -30,25 +41,82 @@
     <script>
 
         function getMembers(){
-
             fetch("http://127.0.0.1:5000/members").then((response) => response.json())
             .then((data) =>{
                 let members = data['data'];
                 for(x in members){
                     document.getElementById("allmembers").innerHTML += `<!-- card -->
                                                                             <div class="card">
-                                                                                <h5>Name: ${members[x][0]}</h5>
-                                                                                <h5>Email: ${members[x][1]}</h5>
-                                                                                <h5>Phone: ${members[x][2]}</h5>
+                                                                                <h5>Name: <span id="${x}_name">${members[x][0]}</snap> </h5>
+                                                                                <h5>Email: <span id='${x}_email'>${members[x][1]}</span></h5>
+                                                                                <h5>Phone: <span id='${x}_phone'>${members[x][2]}</span></h5>
+
+                                                                                <button onclick='deleteMember("${members[x][2]}")'> Delete </button>
+                                                                                <button onclick='updateMemberData("${x}")'> Update </button>
                                                                             </div>`
                 }
             });
-
-            return
+            
         }
 
 
         getMembers()
+
+        async function deleteMember(number){
+            let headersList = {
+                "Accept": "*/*",
+               }
+               
+               let response = await fetch("http://127.0.0.1:5000/delete-member/" + number, { 
+                 method: "DELETE",
+                 headers: headersList
+               });
+               
+               let data = await response.text();
+               console.log(data);
+               alert("User deleted successfully")
+        }
+
+        function updateMemberData(x){
+            var name = document.getElementById(x + "_name").innerHTML;
+            var email = document.getElementById(x + "_email").innerHTML;
+            var phone = document.getElementById(x + "_phone").innerHTML;
+
+
+            document.getElementById("name_input").value = name;
+            document.getElementById("email_input").value = email;
+            document.getElementById("phone_input").value = phone;
+
+            document.getElementById("updateForm").style.display = "block"
+        }
         
+
+
+        async function updateMember(){
+            var name = document.getElementById("name_input").value;
+            var email = document.getElementById("email_input").value;
+            var phone = document.getElementById("phone_input").value;
+            
+            let bodyContent = JSON.stringify({
+                "name" : name,
+                "email" : email,
+                "phone" : phone
+              });
+
+              let headersList = {
+                "Content-Type": "application/json"
+               }
+               
+              
+              let response = await fetch("http://127.0.0.1:5000/update-member", { 
+                method: "PUT",
+                body: bodyContent,
+                headers: headersList
+              });
+              
+              let data = await response.text();
+              alert("User Updated successfully")
+        }
+      
     </script>
 </html>
